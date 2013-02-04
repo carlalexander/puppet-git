@@ -29,8 +29,6 @@ define git::resource::repository (
 
   if !$target {
     fail('You must specify a target')
-  } else {
-    $target = $name
   }
 
   if !$cwd {
