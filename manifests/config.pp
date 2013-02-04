@@ -20,19 +20,19 @@ class git::config(
 ) {
   if $user_name {
     exec { 'set-user-name':
-      command => "git config --global user.name \"${user_name}\""
+      command => "/usr/bin/git config --global user.name \"${user_name}\""
     }
   }
 
   if $user_email {
     exec { 'set-user-email':
-      command => "git config --global user.email \"${user_email}\""
+      command => "/usr/bin/git config --global user.email \"${user_email}\""
     }
   }
 
   if $credential_helper {
     exec { 'set-user-email':
-      command => "git config --global credential.helper '${credential_helper}'"
+      command => "/usr/bin/git config --global credential.helper '${credential_helper}'"
     }
   }
 }
