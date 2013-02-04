@@ -18,7 +18,7 @@
 #    target => 'git',
 #    cwd    => '/etc/puppet/modules'
 #  }
-define git::resouce::repository (
+define git::resource::repository (
   $repo = undef,
   $target = undef,
   $cwd = undef
@@ -29,6 +29,8 @@ define git::resouce::repository (
 
   if !$target {
     fail('You must specify a target')
+  } else {
+    $target = $name
   }
 
   if !$cwd {
@@ -36,8 +38,8 @@ define git::resouce::repository (
   }
 
   exec { 'git-clone':
-    command => "/usr/bin/git clone ${repo} ${target}"
-    cwd     => $cwd
+    command => "/usr/bin/git clone ${repo} ${target}",
+    cwd     => $cwd,
     creates => "${cwd}/${target}",
     notify  => File["${cwd}/${target}"]
   }
