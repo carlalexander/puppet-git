@@ -39,12 +39,14 @@ define git::resource::repository (
     command => "/usr/bin/git clone ${repo} ${target}",
     cwd     => $cwd,
     creates => "${cwd}/${target}",
-    notify  => File["${cwd}/${target}"]
+    notify  => File["${cwd}/${target}"],
+    require => Class['git']
   }
 
   file { "${cwd}/${target}":
-    owner => 'root',
-    group => 'root',
-    mode  => '0644',
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    require => Exec['git-clone']
   }
 }
