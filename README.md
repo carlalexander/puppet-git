@@ -6,7 +6,7 @@ Puppet module designed to manage git as well as cloned git repos.
 
 Currently only tested using Ubuntu Quantal.
 
-## Setup
+## Usage
 
 To install and bootstrap git, simply add the class defintion:
 

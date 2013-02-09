@@ -20,18 +20,20 @@
 #  }
 define git::resource::repository (
   $repo = undef,
-  $target = undef,
+  $target = $name,
   $cwd = undef
 ) {
-  if !$repo {
+  File {
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+  }
+
+  if (!$repo) {
     fail('You must specify a repo')
   }
 
-  if !$target {
-    fail('You must specify a target')
-  }
-
-  if !$cwd {
+  if (!$cwd) {
     fail('You must specify a working directory')
   }
 
@@ -43,10 +45,8 @@ define git::resource::repository (
     require => Class['git']
   }
 
-  file { "${cwd}/${target}":
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
+  file { "git-${cwd}/${target}":
+    path    => "${cwd}/${target}",
     require => Exec['git-clone']
   }
 }
