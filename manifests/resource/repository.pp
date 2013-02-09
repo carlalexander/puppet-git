@@ -45,8 +45,7 @@ define git::resource::repository (
     require => Class['git']
   }
 
-  file { "git-${cwd}/${target}":
-    path    => "${cwd}/${target}",
+  file { "${cwd}/${target}":
     require => Exec['git-clone']
   }
 }
