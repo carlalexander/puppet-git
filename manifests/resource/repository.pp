@@ -41,7 +41,6 @@ define git::resource::repository (
     command => "/usr/bin/git clone ${repo} ${target}",
     cwd     => $cwd,
     creates => "${cwd}/${target}/.git",
-    notify  => File["${cwd}/${target}"],
     require => Class['git']
   }
 }
