@@ -23,6 +23,9 @@ define git::resource::repository (
   $target = $name,
   $cwd = undef
 ) {
+  Exec {
+    path => '/bin:/sbin:/usr/bin:/usr/sbin',
+  }
   File {
     owner   => 'root',
     group   => 'root',
@@ -37,8 +40,8 @@ define git::resource::repository (
     fail('You must specify a working directory')
   }
 
-  exec { 'git-clone':
-    command => "/usr/bin/git clone ${repo} ${target}",
+  exec { "git-clone-${name}":
+    command => "git clone ${repo} ${target}",
     cwd     => $cwd,
     creates => "${cwd}/${target}/.git",
     require => Class['git']
